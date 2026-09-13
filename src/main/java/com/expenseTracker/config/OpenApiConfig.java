@@ -22,17 +22,17 @@ import org.springframework.context.annotation.Configuration;
         ),
         servers = {
                 @Server(
-                        url = "http://localhost:8080/api",
+                        url = "http://localhost:8080",
                         description = "Development Server"
                 ),
                 @Server(
-                        url = "https://api.expensetracker.com/api",
+                        url = "https://api.expensetracker.com",
                         description = "Production Server"
                 )
         }
 )
 @SecurityScheme(
-        name = "Bearer Authentication",
+        name = "bearerAuth",
         type = SecuritySchemeType.HTTP,
         scheme = "bearer",
         bearerFormat = "JWT",

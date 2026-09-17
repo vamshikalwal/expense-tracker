@@ -1,5 +1,6 @@
 package com.expenseTracker.controller;
 
+import com.expenseTracker.dto.BudgetDTO;
 import com.expenseTracker.dto.CardWiseDTO;
 import com.expenseTracker.dto.CategoryWiseDTO;
 import com.expenseTracker.dto.DailyReportDTO;
@@ -61,6 +62,14 @@ public class ReportController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         List<DailyReportDTO> report = reportService.generateDailyReport(startDate, endDate);
+        return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
+    @GetMapping("/budget-summary")
+    @Operation(summary = "Get monthly budget summary with alert status and recommendations")
+    public ResponseEntity<List<BudgetDTO>> getBudgetSummary(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate month) {
+        List<BudgetDTO> report = reportService.generateBudgetSummary(month);
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 }

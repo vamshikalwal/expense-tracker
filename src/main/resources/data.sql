@@ -15,6 +15,11 @@ VALUES
     (1, 'SBI', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (2, 'HDFC', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+INSERT INTO budgets (id, category, monthly_limit, budget_month, user_id, created_at, updated_at)
+VALUES
+    (1, 'Food', 250.00, '2026-09-01', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (2, 'Transport', 120.00, '2026-09-01', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
 INSERT INTO transactions (id, payment_name, amount, date, category, payment_type, card_id, bank_id, user_id, created_at, updated_at)
 VALUES
     (1, 'Grocery', 50.00, '2026-09-01', 'Food', 'CARD', 1, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

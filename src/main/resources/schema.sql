@@ -33,6 +33,20 @@ CREATE TABLE IF NOT EXISTS banks (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Create budgets table
+CREATE TABLE IF NOT EXISTS budgets (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    category VARCHAR(50) NOT NULL,
+    monthly_limit DOUBLE NOT NULL,
+    budget_month DATE NOT NULL,
+    user_id BIGINT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_budget_user_month (user_id, budget_month),
+    INDEX idx_budget_category (category),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Create transactions table
 CREATE TABLE IF NOT EXISTS transactions (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,

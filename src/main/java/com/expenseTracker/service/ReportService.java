@@ -1,4 +1,5 @@
 package com.expenseTracker.service;
+import com.expenseTracker.dto.BudgetDTO;
 import com.expenseTracker.dto.CardWiseDTO;
 import com.expenseTracker.dto.CategoryWiseDTO;
 import com.expenseTracker.dto.DailyReportDTO;
@@ -39,6 +40,9 @@ public class ReportService {
 
     @Autowired
     private JwtProvider jwtProvider;
+
+    @Autowired
+    private BudgetService budgetService;
 
     public Map<String, Object> generateSummaryReport(String period) {
 
@@ -210,5 +214,9 @@ public class ReportService {
                     return dto;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public List<BudgetDTO> generateBudgetSummary(LocalDate budgetMonth) {
+        return budgetService.getBudgets(budgetMonth);
     }
 }

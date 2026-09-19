@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -107,7 +108,8 @@ public class BankService {
                 .findByUserIdAndBankId(userId, bankId);
     }
 
-    public void deleteBank(Long bankId) {
+        @Transactional
+        public void deleteBank(Long bankId) {
 
         Long userId = jwtProvider.getCurrentUserId();
 
@@ -124,6 +126,9 @@ public class BankService {
                                 )
                         );
 
+        transactionRepository.deleteAll(
+                transactionRepository.findByUserIdAndBankId(userId, bankId)
+        );
         bankRepository.delete(bank);
 
         log.info(

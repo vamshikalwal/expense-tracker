@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -105,7 +106,8 @@ public class CardService {
                 .findByUserIdAndCardId(userId, cardId);
     }
 
-    public void deleteCard(Long cardId) {
+        @Transactional
+        public void deleteCard(Long cardId) {
 
         Long userId = jwtProvider.getCurrentUserId();
 
@@ -122,6 +124,9 @@ public class CardService {
                                 )
                         );
 
+        transactionRepository.deleteAll(
+                transactionRepository.findByUserIdAndCardId(userId, cardId)
+        );
         cardRepository.delete(card);
 
         log.info(

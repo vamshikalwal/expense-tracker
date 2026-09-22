@@ -126,6 +126,8 @@ public class ReportService {
         report.put("totalBanks", bankSummary.stream()
                 .mapToDouble(item -> ((Number) item.get("total")).doubleValue())
                 .sum());
+        report.put("totalExpense", totalAmount != null ? totalAmount : 0D);
+        report.put("transactionCount", (long) transactions.size());
 
         return report;
     }

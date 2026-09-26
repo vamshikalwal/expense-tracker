@@ -200,10 +200,12 @@ public class ReportService {
         return transactions.stream()
                 .collect(Collectors.groupingBy(
                         Transaction::getDate,
+                        java.util.TreeMap::new,
                         Collectors.summingDouble(Transaction::getAmount)
                 ))
                 .entrySet()
                 .stream()
+                .sorted(Map.Entry.comparingByKey())
                 .map(entry -> {
                     DailyReportDTO dto = new DailyReportDTO();
                     dto.setDate(entry.getKey());

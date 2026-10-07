@@ -1,5 +1,6 @@
 package com.expenseTracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -77,6 +78,7 @@ public class User {
     private String email;
 
     @NotBlank(message = "Password is required")
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 

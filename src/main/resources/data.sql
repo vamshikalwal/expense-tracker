@@ -1,5 +1,6 @@
--- Validation seed data for Expense Tracker
--- Run after schema.sql on an empty database
+-- Manual seed data for Expense Tracker.
+-- This file is intentionally not auto-executed by Spring Boot.
+-- Run it only once on a fresh database if you want demo data.
 
 INSERT INTO users (id, name, email, password, created_at, updated_at)
 VALUES
